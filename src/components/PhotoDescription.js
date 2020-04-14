@@ -1,9 +1,15 @@
 import React from "react";
+import styled from "styled-components";
+
+const PhotoArticle = styled.article`
+margin: 2% 5%;
+
+`
 
 const PhotoDescription = props => {
   return (
     <div>
-      <article>{props.desc}</article>
+      <PhotoArticle>{props.desc}</PhotoArticle>
     </div>
   );
 };

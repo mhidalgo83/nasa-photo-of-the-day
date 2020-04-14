@@ -1,7 +1,8 @@
-import React from "react";
+import styled from "styled-components";
 
-const PhotoTitle = props => {
-    return <h1>{props.title}</h1>
-}
+const PhotoTitle = styled.h1`
+display: flex;
+align-self: center;
+`
 
 export default PhotoTitle;

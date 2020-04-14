@@ -4,25 +4,30 @@ import Photo from "./components/Photo";
 import PhotoTitle from "./components/PhotoTitle";
 import PhotoDescription from "./components/PhotoDescription";
 import PhotoDate from "./components/PhotoDate";
-import "./App.css";
+import styled from "styled-components";
+import dotenv from "dotenv";
 const axios = require("axios");
-const apiKey = "5uWkEnwSm2ygUVGF51iuPAiwWhJViiJlWoRgmhJ1";
+// const apiKey = "5uWkEnwSm2ygUVGF51iuPAiwWhJViiJlWoRgmhJ1";
+dotenv.config({path: "../.env"});
+const apiKey = process.env.API_KEY;
+const WrapperDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+console.log(apiKey);
 
 function App() {
-  let val;
   const [nasaPic, setNasaPic] = useState("");
   const [date, setDate] = useState("");
 
   const newDate = () => {
-    val = document.querySelector("input[type='date']");
+    const val = document.querySelector("input[type='date']");
     const dateVal = val.value;
-    return setDate(dateVal)
+    return setDate(dateVal);
   };
 
   useEffect(() => {
-    if (date === "") {
-      setDate(new Date().toISOString().slice(0, 10));
-    }
+    console.log(date);
 
     const fetchData = () => {
       axios
@@ -31,27 +36,27 @@ function App() {
         )
         .then((res) => {
           setNasaPic(res.data);
-          console.log(nasaPic);
         })
         .catch((err) => {
-          console.log(`Error: ${err}`);
+          console.log(`${err}`);
         });
     };
     fetchData();
   }, [date]);
 
   console.log(nasaPic);
+
   if (nasaPic === "") {
     return <h3>Loading...</h3>;
   }
   return (
-    <div className="App">
-      <Photo src={nasaPic.url} />
-      <PhotoTitle title={nasaPic.title} />
-      <PhotoDate date={nasaPic.date} />
-      <PhotoDescription desc={nasaPic.explanation} />
+    <WrapperDiv>
+      <PhotoTitle>{nasaPic.title} </PhotoTitle>
+      <Photo src={nasaPic.url} alt={nasaPic.title} />
+      <PhotoDate>Photo Date: {nasaPic.date}</PhotoDate>
       <DateDropdown onClick={newDate} />
-    </div>
+      <PhotoDescription desc={nasaPic.explanation} />
+    </WrapperDiv>
   );
 }
 
