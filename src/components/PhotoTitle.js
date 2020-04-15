@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 const PhotoTitle = styled.h1`
-display: flex;
-align-self: center;
+margin: 2% auto;
 `
 
 export default PhotoTitle;

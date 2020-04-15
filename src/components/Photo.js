@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const PhotoImage = styled.img`
-  width: 50%;
+  width: 45%;
   margin: 2% auto;
 `;
 

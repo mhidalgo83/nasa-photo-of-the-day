@@ -5,11 +5,11 @@ import PhotoTitle from "./components/PhotoTitle";
 import PhotoDescription from "./components/PhotoDescription";
 import PhotoDate from "./components/PhotoDate";
 import styled from "styled-components";
-// import dotenv from "dotenv";
+
 const axios = require("axios");
-const apiKey = "5uWkEnwSm2ygUVGF51iuPAiwWhJViiJlWoRgmhJ1";
-// dotenv.config({path: "../.env"});
-// const apiKey = process.env.API_KEY;
+require("dotenv").config();
+const apiKey = process.env.REACT_APP_API_KEY;
+
 const WrapperDiv = styled.div`
   display: flex;
   flex-direction: column;
