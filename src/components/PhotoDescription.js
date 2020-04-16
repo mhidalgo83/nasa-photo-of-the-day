@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const Div = styled.div`
 display: flex;
-
 text-align: center;
 `
 

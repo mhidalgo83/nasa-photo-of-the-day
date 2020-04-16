@@ -14,13 +14,17 @@ const WrapperDiv = styled.div`
   display: flex;
   flex-direction: column;
 `;
-console.log(apiKey);
+
+const Title = styled.h1`
+  text-align: center;
+`
 
 function App() {
   const [nasaPic, setNasaPic] = useState("");
   const [date, setDate] = useState("");
 
   const newDate = () => {
+    setNasaPic("");
     const val = document.querySelector("input[type='date']");
     const dateVal = val.value;
     return setDate(dateVal);
@@ -51,6 +55,7 @@ function App() {
   }
   return (
     <WrapperDiv>
+      <Title>NASA Astronomy Picture of the Day</Title>
       <PhotoTitle>{nasaPic.title} </PhotoTitle>
       <Photo src={nasaPic.url} alt={nasaPic.title} />
       <PhotoDate>Photo Date: {nasaPic.date}</PhotoDate>
