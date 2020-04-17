@@ -4,6 +4,7 @@ import Photo from "./components/Photo";
 import PhotoTitle from "./components/PhotoTitle";
 import PhotoDescription from "./components/PhotoDescription";
 import PhotoDate from "./components/PhotoDate";
+import moment from "moment";
 import styled from "styled-components";
 
 const axios = require("axios");
@@ -11,13 +12,36 @@ require("dotenv").config();
 const apiKey = process.env.REACT_APP_API_KEY;
 
 const WrapperDiv = styled.div`
+@keyframes animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+animation-name: animation;
+animation-duration: 1s;
+  background-image: linear-gradient(to top right, red, yellow);
+  background-size: 100vw;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
 `;
 
 const Title = styled.h1`
   text-align: center;
-`
+`;
+
+const Col = styled.div`
+  width: 48%;
+  text-align: center;
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 function App() {
   const [nasaPic, setNasaPic] = useState("");
@@ -56,11 +80,19 @@ function App() {
   return (
     <WrapperDiv>
       <Title>NASA Astronomy Picture of the Day</Title>
-      <PhotoTitle>{nasaPic.title} </PhotoTitle>
-      <Photo src={nasaPic.url} alt={nasaPic.title} />
-      <PhotoDate>Photo Date: {nasaPic.date}</PhotoDate>
-      <DateDropdown onClick={newDate} />
-      <PhotoDescription desc={nasaPic.explanation} />
+      <FlexWrapper>
+        <Col>
+          <DateDropdown onClick={newDate} />
+        </Col>
+        <Col>
+          <PhotoTitle>{nasaPic.title} </PhotoTitle>
+          <Photo src={nasaPic.url} alt={nasaPic.title} />
+          <PhotoDate>
+            Photo Date: {moment(nasaPic.date).format("MM/DD/YYYY")}
+          </PhotoDate>
+          <PhotoDescription desc={nasaPic.explanation} />
+        </Col>
+      </FlexWrapper>
     </WrapperDiv>
   );
 }
